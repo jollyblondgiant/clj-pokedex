@@ -10,9 +10,12 @@
                  [clj-http "3.12.3"]
                  [org.clojure/data.json "2.4.0"]
                  ;;add datomic
+                 [org.clojure/core.async "1.4.627"]
+                 [org.clojure/tools.nrepl   "0.2.13"] ; Optional, for Cider
 
+                 [com.taoensso/timbre       "5.1.2"]
                  [ring "1.9.4"]
-                 [ring/ring-defaults        "0.3.2"]
+                 [ring/ring-defaults        "0.3.3"]
                  [com.taoensso/sente "1.16.2"]
                  [org.clojure/clojurescript "1.10.891"
                   :scope "provided"]

@@ -10,6 +10,8 @@
              :refer (get-sch-adapter)]
             [ring.middleware.anti-forgery
              :refer [wrap-anti-forgery]]
+            [ring.middleware.defaults :refer
+             [wrap-defaults site-defaults]]
             [compojure.route :as route]))
 
 (defn random-pokemon [region] ;; #{:johto :kanto}
@@ -84,8 +86,10 @@
   [& args]
   (let [prt (Integer/parseInt (or (System/getenv "PORT") "3000"))]
     (-> #'app-routes
-        ring.middleware.keyword-params/wrap-keyword-params
-        ring.middleware.params/wrap-params
-        ring.middleware.anti-forgery/wrap-anti-forgery
-        ring.middleware.session/wrap-session
+        (wrap-defaults site-defaults)
+        wrap-anti-forgery
+        ;; ring.middleware.keyword-params/wrap-keyword-params
+        ;; ring.middleware.params/wrap-params
+        ;; ring.middleware.anti-forgery/wrap-anti-forgery
+        ;; ring.middleware.session/wrap-session
         (server/run-server {:port prt}))))
