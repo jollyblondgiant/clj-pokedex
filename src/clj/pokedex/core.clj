@@ -88,8 +88,8 @@
     (-> #'app-routes
         (wrap-defaults site-defaults)
         wrap-anti-forgery
-        ;; ring.middleware.keyword-params/wrap-keyword-params
-        ;; ring.middleware.params/wrap-params
+        ring.middleware.keyword-params/wrap-keyword-params
+        ring.middleware.params/wrap-params
         ;; ring.middleware.anti-forgery/wrap-anti-forgery
         ;; ring.middleware.session/wrap-session
         (server/run-server {:port prt}))))
