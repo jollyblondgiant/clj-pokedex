@@ -27,11 +27,11 @@
     {:name name :sprite-url sprite}))
 
 (def mount-target
-  #_(let  [csrf-token
-           (force ring.middleware.anti-forgery/*anti-forgery-token*)])
-  [:div#app
-   #_[:div#sente-csrf-token {:data-csrf-token csrf-token}]
-   ])
+  (let  [csrf-token
+         (force ring.middleware.anti-forgery/*anti-forgery-token*)]
+    [:div#app
+     [:div#sente-csrf-token {:data-csrf-token csrf-token}]
+     ]))
 
 (defn head []
   [:head

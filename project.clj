@@ -34,7 +34,7 @@
 
   :cljsbuild
   {:builds {:min
-            {:source-paths ["src/cljs" "src/cljc" "env/prod/cljs"]
+            {:source-paths ["src/cljs"  "env/prod/cljs"]
              :compiler
              {:output-to        "target/cljsbuild/public/js/app.js"
               :output-dir       "target/cljsbuild/public/js"
@@ -43,7 +43,7 @@
               :infer-externs true
               :pretty-print  false}}
             :app
-            {:source-paths ["src/cljs" "src/cljc" "env/dev/cljs"]
+            {:source-paths ["src/cljs"  "env/dev/cljs"]
              :figwheel {:on-jsload "pokedex.core/mount-root"}
              :compiler
              {:main "pokedex.dev"
