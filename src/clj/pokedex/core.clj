@@ -8,6 +8,8 @@
             [taoensso.sente :as sente]
             [taoensso.sente.server-adapters.http-kit
              :refer (get-sch-adapter)]
+            [ring.middleware.anti-forgery
+             :refer [wrap-anti-forgery]]
             [compojure.route :as route]))
 
 (defn random-pokemon [region] ;; #{:johto :kanto}
@@ -80,6 +82,10 @@
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
-  (let [port (Integer/parseInt (or (System/getenv "PORT") "3000"))]
-    (server/run-server #'app-routes {:port port})
-    (println (str "running server at 127.0.0.1:" port "/"))))
+  (let [prt (Integer/parseInt (or (System/getenv "PORT") "3000"))]
+    (-> #'app-routes
+        ring.middleware.keyword-params/wrap-keyword-params
+        ring.middleware.params/wrap-params
+        ring.middleware.anti-forgery/wrap-anti-forgery
+        ring.middleware.session/wrap-session
+        (server/run-server {:port prt}))))
